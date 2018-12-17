@@ -4,13 +4,16 @@ function ListNode(val) {
   this.next = null;
 };
 
+// Solution 1: 
+// Time Complexity: O(n) 
+// Space Complexity: O(n)
 function removeDups(list) {
   if (!list || !list.next) return list;
   let set = new Set();
 
   set.add(list.value);
 
-  while (list.next) {
+  while (list.next) { // O(n)
     if (set.has(list.next.value)) {
       list.next = list.next.next;
     } else {
@@ -18,6 +21,27 @@ function removeDups(list) {
       list = list.next;
     }
   }
+};
+
+// Solution 2: 
+// Time Complexity: O(n2) 
+// Space Complexity: O(1)
+function removeDups(list) {
+  if (!list || !list.next) return list;
+
+  while (list) { // O(n)
+    let curr = list;
+
+    while (curr.next) { // O(n)
+      if (curr.next.value === list.value) {
+        curr.next = curr.next.next;
+      } else {
+        curr = curr.next;
+      }
+    }
+
+    list = list.next;
+  };
 };
 
 var oneNode = new ListNode(1);
