@@ -11,10 +11,20 @@
 // Time: O(n)
 // Space: O(1)
 const URLify = (str, strLength) => {
-  // Check if string only contains spaces; else, trim the trailing space
-  return !str.replace(/\s/g, '').length ? str.replace(/\s/g, "%20") : str.trim().replace(/\s/g, "%20");
+  return str.trim().replace(/\s/g, "%20");
 };
 
-console.log(URLify(" ", 1)); // "%20"
+// Solution 2: for loop
+// Time: O(n)
+// Space: O(n)
+const URLify = (str, strLength) => {
+  let arr = [...str];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === ' ') arr[i] = '%20';
+  }
+  return arr.join('');
+};
+
 console.log(URLify("Mr John Smith   ", 13)); // "Mr%20John%20Smith"
 console.log(URLify("We are such stuff as dreams are made on, and our little life is rounded with a sleep.", 85));
+// "We%20are%20such%20stuff%20as%20dreams%20are%20made%20on,%20and%20our%20little%20life%20is%20rounded%20with%20a%20sleep."
