@@ -12,7 +12,7 @@ let StackMin = function() {
 };
 
 StackMin.prototype.push = function(val) {
-  if (!this.currMin || val < this.currMin) {
+  if (!this.currMin || val <= this.currMin) {
     this.min.push(this.currMin);
     this.currMin = val;
   }
@@ -30,15 +30,15 @@ StackMin.prototype.pop = function() {
 };
 
 StackMin.prototype.peep = function() {
-
+  return this.stack.peek();
 };
 
 StackMin.prototype.isEmpty = function() {
-
+  return this.stack.isEmpty();
 };
 
 StackMin.prototype.getMin = function() {
-
+  return this.currMin;
 };
 
 // Tests
@@ -48,8 +48,12 @@ t.push(6);
 t.push(3);
 t.push(7);
 t.push(1);
-console.log(t);
 console.log(t.currMin); // 1
+console.log(t.min); // 1
 console.log(t.pop()); // pop off 1
-console.log(t);
 console.log(t.currMin); // 3
+console.log(t.peep()); // 7
+console.log(t.isEmpty()); // false
+t.pop(); // pop off 7
+t.pop(); // pop off 3
+console.log(t.getMin()); // 5
