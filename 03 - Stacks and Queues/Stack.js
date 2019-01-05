@@ -35,18 +35,36 @@ Stack.prototype.isEmpty = function() {
   return this.top ? false : true;
 };
 
+Stack.prototype.reverse = function() {
+  let curr = this.top;
+  let prev = null;
+
+  while (curr) {
+    let next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+  }
+
+  this.top = prev;
+};
+
 // Tests
-// let t = new Stack();
-// console.log(t.isEmpty()); // true
-// t.push(1);
-// t.push(2);
-// t.push(3);
-// console.log(t.peek()); // 3
-// t.pop();
-// console.log(t);
-// console.log(t.isEmpty()); // false
-// t.push(4);
-// t.pop();
-// console.log(t.peek()); // 2
+let t = new Stack();
+console.log(t.isEmpty()); // true
+t.push(1);
+t.push(2);
+t.push(3);
+console.log(t.peek()); // 3
+t.pop();
+console.log(t);
+console.log(t.isEmpty()); // false
+t.push(4);
+t.pop();
+console.log(t.peek()); // 2
+t.push(3);
+console.log(t); // 3 -> 2 -> 1
+t.reverse();
+console.log(t); // 1 -> 2 -> 3
 
 module.exports = Stack;
