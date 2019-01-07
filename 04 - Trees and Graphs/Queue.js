@@ -32,20 +32,32 @@ Queue.prototype.dequeue = function() {
 };
 
 Queue.prototype.peep= function() {
-
+  if (this.front) {
+    return this.front.value;
+  } else {
+    return null;
+  }
 };
 
 Queue.prototype.isEmpty = function() {
-
+  if (!this.front && !this.back) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 // Tests
 
 let q = new Queue();
+console.log(q.isEmpty()); // true
 q.enqueue(1);
 q.enqueue(2);
 q.enqueue(3);
-console.log(q.dequeue()); // 3
-console.log(q);
+console.log(q.dequeue()); // 1
+q.enqueue(3);
+q.enqueue(4);
+console.log(q.peep()); // 2
+console.log(q.isEmpty()); // false
 
 module.exports = Queue;
