@@ -16,11 +16,19 @@ Queue.prototype.enqueue = function(value) {
     this.back.next = newNode;
     this.back = this.back.next;
   }
-
 };
 
 Queue.prototype.dequeue = function() {
+  if (this.front === this.back) {
+    this.front = null;
+    this.back = null;
+  }
 
+  if (this.front) {
+    let popped = this.front.value;
+    this.front = this.front.next;
+    return popped;
+  }
 };
 
 Queue.prototype.peep= function() {
@@ -37,6 +45,7 @@ let q = new Queue();
 q.enqueue(1);
 q.enqueue(2);
 q.enqueue(3);
+console.log(q.dequeue()); // 3
 console.log(q);
 
 module.exports = Queue;
